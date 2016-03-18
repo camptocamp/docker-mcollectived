@@ -29,6 +29,7 @@ ONBUILD COPY plugins/ /opt/puppetlabs/mcollective/plugins/
 
 # Configure entrypoint
 COPY /docker-entrypoint.sh /
+COPY /docker-entrypoint.d/* /docker-entrypoint.d/
 ONBUILD COPY /docker-entrypoint.d/* /docker-entrypoint.d/
 ENTRYPOINT ["/docker-entrypoint.sh", "/opt/puppetlabs/puppet/bin/mcollectived"]
 CMD ["--no-daemonize"]
