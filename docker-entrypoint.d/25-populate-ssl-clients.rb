@@ -32,7 +32,7 @@ end
 
 users.uniq.each do |u|
   github.users.keys.list(user: u).each do |k|
-    File.open(File.join(ssldir, "#{u}.pem"), 'w') do |f|
+    File.open(File.join(ssldir, "#{u}_#{k[:id]}.pem"), 'w') do |f|
       f.puts %x{/bin/bash -c "ssh-keygen -f /dev/stdin -e -m pem <<<'#{k[:key]}'"}
     end
   end
