@@ -33,6 +33,7 @@ end
 
 users.uniq.each do |u|
   github.users.keys.list(user: u).each do |k|
+    # Use a tempfile, as using stdin fails
     tmp = Tempfile.new("#{u}_#{k[:id]}")
     begin
       tmp.puts(k[:key])
