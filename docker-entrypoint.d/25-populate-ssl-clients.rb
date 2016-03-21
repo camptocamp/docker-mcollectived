@@ -15,11 +15,7 @@ users = (ENV['GITHUB_USERS'] || '').split(',')
 teams = (ENV['GITHUB_TEAMS'] || '').split(',')
 ssldir = '/etc/puppetlabs/mcollective/clients'
 
-gh_user = ENV['GITHUB_USER']
-gh_pass = ENV['GITHUB_PASSWORD']
-
-
-github = Github.new basic_auth: "#{gh_user}:#{gh_pass}"
+github = Github.new oauth_token: ENV['GITHUB_TOKEN']
 
 teams.each do |t|
   github.orgs.teams.list(org: org).each do |tt|

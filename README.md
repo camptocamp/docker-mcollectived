@@ -1,8 +1,8 @@
 MCollectived Docker image
 =========================
 
-Environment variables
----------------------
+
+## Environment variables
 
 ### STOMP_USER
 
@@ -22,6 +22,10 @@ Server private key
 
 ### GITHUB_TEAMS
 
-### GITHUB_USER
+### GITHUB_TOKEN
 
-### GITHUB_PASSWORD 
+The Github token to use to connect to the Github API. It must allow two actions:
+
+- read:org
+- read:public_key
+
