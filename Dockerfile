@@ -11,7 +11,7 @@ ENV PATH=/opt/puppetlabs/puppet/bin:/opt/puppetlabs/bin:$PATH
 # Install puppet-agent
 ENV RELEASE jessie
 RUN apt-get update \
-  && apt-get install -y curl locales-all \
+  && apt-get install -y curl locales-all openssh-client \
   && curl -O http://apt.puppetlabs.com/puppetlabs-release-pc1-${RELEASE}.deb \
   && dpkg -i puppetlabs-release-pc1-${RELEASE}.deb \
   && rm -rf /var/lib/apt/lists/*
