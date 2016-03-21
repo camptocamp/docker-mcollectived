@@ -33,7 +33,12 @@ RUN sed -i -e 's/^securityprovider = .*$/securityprovider = ssl/' \
 
 ONBUILD COPY plugins/ /opt/puppetlabs/mcollective/plugins/
 
-RUN gem install rack github_api --no-ri --no-rdoc
+# github_pki
+ENV GOPATH=/go
+RUN apt-get update && apt-get install -y golang-go git \
+  && go get github.com/raphink/github_pki \
+  && apt-get autoremove -y golang-go git \
+  && rm -rf /var/lib/apt/lists/*
 
 # Configure entrypoint
 COPY /docker-entrypoint.sh /
