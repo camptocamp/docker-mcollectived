@@ -23,7 +23,8 @@ RUN apt-get update \
 
 # Configure mcollectived
 RUN sed -i -e 's/^securityprovider = .*$/securityprovider = ssl/' \
-    -e 's/6163/61613/' /etc/puppetlabs/mcollective/server.cfg \
+   -e 's/stomp1/activemq/' -e 's/6163/61613/' \
+   /etc/puppetlabs/mcollective/server.cfg \
   && echo plugin.ssl_client_cert_dir = /etc/puppetlabs/mcollective/clients >> /etc/puppetlabs/mcollective/server.cfg \
   && echo plugin.ssl_server_private = /etc/puppetlabs/mcollective/ssl/server-private.pem >> /etc/puppetlabs/mcollective/server.cfg \
   && echo plugin.ssl_server_public = /etc/puppetlabs/mcollective/ssl/server-public.pem >> /etc/puppetlabs/mcollective/server.cfg \
