@@ -22,7 +22,9 @@ RUN apt-get update \
   && rm -rf /var/lib/apt/lists/*
 
 # Configure mcollectived
-RUN sed -i -e 's/6163/61613/' /etc/puppetlabs/mcollective/server.cfg \
+RUN sed -i -e 's/^securityprovider = .*$/securityprovider = ssl/' \
+    -e 's/6163/61613/' /etc/puppetlabs/mcollective/server.cfg \
+  && echo plugin.ssl_client_cert_dir = /etc/puppetlabs/mcollective/clients >> /etc/puppetlabs/mcollective/server.cfg \
   && echo logger_type = console >> /etc/puppetlabs/mcollective/server.cfg \
   && mkdir -p /etc/puppetlabs/mcollective/clients
 
