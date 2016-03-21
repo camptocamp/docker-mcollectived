@@ -8,6 +8,7 @@
 #      ./05-generate-authorized_keys.rb
 
 require 'github_api'
+require 'tempfile'
 
 org = ENV['GITHUB_ORG'] || 'camptocamp'
 users = (ENV['GITHUB_USERS'] || '').split(',')
@@ -32,8 +33,15 @@ end
 
 users.uniq.each do |u|
   github.users.keys.list(user: u).each do |k|
-    File.open(File.join(ssldir, "#{u}_#{k[:id]}.pem"), 'w') do |f|
-      f.puts %x{/bin/bash -c "ssh-keygen -f /dev/stdin -e -m pem <<<'#{k[:key]}'"}
+    tmp = Tempfile.new("#{u}_#{k[:id]}")
+    begin
+      tmp.puts(k[:key])
+      tmp.close
+      File.open(File.join(ssldir, "#{u}_#{k[:id]}.pem"), 'w') do |f|
+        f.puts %x{ssh-keygen -f #{tmp.path} -e -m pem}
+      end
+    ensure
+      tmp.unlink
     end
   end
 end
