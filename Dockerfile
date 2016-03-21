@@ -23,7 +23,8 @@ RUN apt-get update \
 
 # Configure mcollectived
 RUN sed -i -e 's/6163/61613/' /etc/puppetlabs/mcollective/server.cfg \
-  && echo logger_type = console >> /etc/puppetlabs/mcollective/server.cfg
+  && echo logger_type = console >> /etc/puppetlabs/mcollective/server.cfg \
+  && mkdir -p /etc/puppetlabs/mcollective/clients
 
 ONBUILD COPY plugins/ /opt/puppetlabs/mcollective/plugins/
 
