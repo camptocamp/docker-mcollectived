@@ -27,6 +27,8 @@ RUN sed -i -e 's/6163/61613/' /etc/puppetlabs/mcollective/server.cfg \
 
 ONBUILD COPY plugins/ /opt/puppetlabs/mcollective/plugins/
 
+RUN gem install rack github_api --no-ri --no-rdoc
+
 # Configure entrypoint
 COPY /docker-entrypoint.sh /
 COPY /docker-entrypoint.d/* /docker-entrypoint.d/
