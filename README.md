@@ -1,6 +1,8 @@
 MCollectived Docker image
 =========================
 
+[![Docker Pulls](https://img.shields.io/docker/pulls/camptocamp/mcollectived.svg)](https://hub.docker.com/r/camptocamp/mcollectived/)
+[![By Camptocamp](https://img.shields.io/badge/by-camptocamp-fb7047.svg)](http://www.camptocamp.com)
 
 ## Environment variables
 
@@ -18,9 +20,15 @@ Server private key
 
 ### GITHUB_ORG
 
+Organization to use for SSL keys
+
+### GITHUB_TEAM
+
+Team to use for SSL keys
+
 ### GITHUB_USERS
 
-### GITHUB_TEAMS
+Additional users for SSL keys
 
 ### GITHUB_TOKEN
 
