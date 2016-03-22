@@ -36,7 +36,7 @@ ONBUILD COPY plugins/ /opt/puppetlabs/mcollective/plugins/
 # github_pki
 ENV GOPATH=/go
 RUN apt-get update && apt-get install -y golang-go git \
-  && go get github.com/raphink/github_pki \
+  && go get github.com/camptocamp/github_pki \
   && apt-get autoremove -y golang-go git \
   && rm -rf /var/lib/apt/lists/*
 
