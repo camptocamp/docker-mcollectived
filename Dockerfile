@@ -24,7 +24,7 @@ RUN apt-get update \
 # Configure mcollectived
 RUN sed -i \
    -e 's/^securityprovider = .*$/securityprovider = ssl/' \
-   -e 's/stomp1/activemq/' \
+   -e 's/stomp1/activemq/' -e 's/6163/61614/' \
    /etc/puppetlabs/mcollective/server.cfg \
   && echo plugin.activemq.pool.1.ssl = true >> /etc/puppetlabs/mcollective/server.cfg \
   && echo plugin.activemq.pool.1.ssl.fallback = true >> /etc/puppetlabs/mcollective/server.cfg \
