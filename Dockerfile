@@ -16,7 +16,7 @@ RUN apt-get update \
   && dpkg -i puppetlabs-release-pc1-${RELEASE}.deb \
   && rm -rf /var/lib/apt/lists/*
 
-ENV PUPPET_AGENT_VERSION=1.5.2-1${RELEASE}
+ENV PUPPET_AGENT_VERSION=1.8.0-1${RELEASE}
 RUN apt-get update \
   && apt-get install -y puppet-agent=${PUPPET_AGENT_VERSION} \
   && rm -rf /var/lib/apt/lists/*
