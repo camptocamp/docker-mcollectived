@@ -34,6 +34,9 @@ RUN sed -i \
   && echo plugin.ssl_server_private = /etc/puppetlabs/mcollective/ssl/server-private.pem >> /etc/puppetlabs/mcollective/server.cfg \
   && echo plugin.ssl_server_public = /etc/puppetlabs/mcollective/ssl/server-public.pem >> /etc/puppetlabs/mcollective/server.cfg \
   && echo logger_type = console >> /etc/puppetlabs/mcollective/server.cfg \
+  && echo plugin.activemq.heartbeat_interval = 30 >> /etc/puppetlabs/mcollective/server.cfg \
+  && echo plugin.activemq.max_hbread_fails = 2 >> /etc/puppetlabs/mcollective/server.cfg \
+  && echo plugin.activemq.max_hbrlck_fails = 2 >> /etc/puppetlabs/mcollective/server.cfg \
   && mkdir -p /etc/puppetlabs/mcollective/clients /etc/puppetlabs/mcollective/ssl
 
 ONBUILD COPY plugins/ /opt/puppetlabs/mcollective/plugins/
