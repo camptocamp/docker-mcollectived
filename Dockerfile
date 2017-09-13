@@ -9,7 +9,7 @@ ENV LANGUAGE=en_US.UTF-8 \
     GOPATH="/go" \
     GOROOT="/goroot"
 
-ENV PUPPET_AGENT_VERSION=1.9.3-1${RELEASE}
+ENV PUPPET_AGENT_VERSION=1.10.7-1${RELEASE}
 
 # Install puppet-agent
 RUN apt-get update \
