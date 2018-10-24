@@ -1,21 +1,18 @@
-FROM debian:jessie
+FROM ubuntu:bionic
+
+ENV RELEASE bionic
 
 ENV LANGUAGE=en_US.UTF-8 \
     LC_ALL=en_US.UTF-8 \
     LANG=en_US.UTF-8 \
     PATH=/opt/puppetlabs/puppet/bin:/opt/puppetlabs/bin:$PATH \
-    RELEASE=jessie \
-    GOVERSION="1.7.5" \
-    GOPATH="/go" \
-    GOROOT="/goroot"
-
-ENV PUPPET_AGENT_VERSION=1.10.7-1${RELEASE}
+    PUPPET_AGENT_VERSION=5.5.7-1${RELEASE}
 
 # Install puppet-agent
 RUN apt-get update \
   && apt-get install -y curl locales-all openssh-client \
-  && curl -O http://apt.puppetlabs.com/puppetlabs-release-pc1-${RELEASE}.deb \
-  && dpkg -i puppetlabs-release-pc1-${RELEASE}.deb \
+  && curl -O http://apt.puppet.com/puppet5-release-${RELEASE}.deb \
+  && dpkg -i puppet5-release-${RELEASE}.deb \
   && rm -rf /var/lib/apt/lists/*
 
 RUN apt-get update \
@@ -43,13 +40,10 @@ ONBUILD COPY plugins/ /opt/puppetlabs/mcollective/plugins/
 
 # github_pki
 RUN apt-get update \
-  && apt-get -y install git curl \
+  && apt-get -y install git curl golang \
   && apt-get install -y ca-certificates \
-  && curl https://storage.googleapis.com/golang/go${GOVERSION}.linux-amd64.tar.gz | tar xzf - \
-  && mv /go ${GOROOT} \
-  && ${GOROOT}/bin/go get github.com/camptocamp/github_pki \
+  && go get github.com/camptocamp/github_pki \
   && apt-get purge -y --auto-remove git curl \
-  && rm -rf go${GOVERSION}.linux-amd64.tar.gz ${GOROOT} \
   && apt-get clean
 
 # Configure entrypoint
